@@ -32,25 +32,22 @@ A full-stack Student Management System built using **Node.js, Express.js, EJS an
 ## 📸 Screenshots
 
 ### Dashboard
-![Dashboard](./screenshots/studentsdata.png)
+![Dashboard](./Student-Management-System/screenshots/dashboard.png)
 
 ### Add Student
-![Add Student](./screenshots/addstudent.png)
-
-### Student Directory and Pagination
-![Student Directory](./screenshots/studentsdata.png)
+![Add Student](./Student-Management-System/screenshots/add-student.png)
 
 ### Student Details
-![Student Details](./screenshots/viewstudent.png)
+![Student Details](./Student-Management-System/screenshots/student-details.png)
 
 ### Attendance Management
-![Attendance](./screenshots/attendence.png)
+![Attendance](./Student-Management-System/screenshots/attendence.png)
 
 ### Previous Attendance History
-![Attendance History](./screenshots/attendence-history.png)
+![Attendance History](./Student-Management-System/screenshots/attendence-history.png)
 
 ### Admin Login
-![Admin Login](./screenshots/login-page.png)
+![Login](./Student-Management-System/screenshots/login.png)
 
 
 ## ⚙️ Installation and Setup
