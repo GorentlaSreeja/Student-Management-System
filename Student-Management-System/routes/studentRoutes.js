@@ -1,0 +1,15 @@
+const router = require('express').Router();
+const students = require('../controllers/studentController');
+const attendance = require('../controllers/attendanceController');
+const { requireAuth } = require('../middleware/auth');
+router.use(requireAuth);
+router.get('/dashboard', students.dashboard);
+router.get('/students/new', students.showNew);
+router.get('/students/:id', students.view);
+router.get('/attendance', attendance.index);
+router.post('/attendance', attendance.mark);
+router.post('/students', students.create);
+router.get('/students/:id/edit', students.showEdit);
+router.put('/students/:id', students.update);
+router.delete('/students/:id', students.remove);
+module.exports = router;

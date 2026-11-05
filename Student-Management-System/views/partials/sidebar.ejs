@@ -1,0 +1,8 @@
+<aside class="sidebar">
+  <a class="brand" href="/dashboard"><span class="brand-mark">C</span><span>Campus<span class="brand-light">Flow</span></span></a>
+  <div class="side-label">WORKSPACE</div>
+  <a class="nav-link active" href="/dashboard"><span class="nav-icon">▦</span> Overview</a>
+  <a class="nav-link" href="/students/new"><span class="nav-icon">＋</span> Add student</a>
+  <a class="nav-link" href="/attendance"><span class="nav-icon">✓</span> Attendance</a>
+  <div class="sidebar-bottom"><div class="profile"><div class="avatar"><%= (userName || 'U').charAt(0).toUpperCase() %></div><div class="profile-info"><strong><%= userName || 'User' %></strong><small>Administrator</small></div></div><form action="/logout" method="POST"><button class="logout-link" type="submit">↪ &nbsp; Sign out</button></form></div>
+</aside>

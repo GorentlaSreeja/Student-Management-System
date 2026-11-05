@@ -1,0 +1,31 @@
+<%- include('partials/header') %>
+<div class="app-shell"><%- include('partials/sidebar', { userName: userName }) %><main class="main-content">
+<header class="topbar"><div><div class="eyebrow">CAMPUS WORKSPACE</div><h1>Attendance</h1></div><a class="btn secondary" href="/dashboard">← Student directory</a></header>
+<% if (success) { %><div class="alert success"><%= success %></div><% } %>
+<section class="table-card attendance-card">
+  <div class="table-heading"><div><h3><%= date === today ? 'Today’s attendance' : 'Attendance for ' + date %></h3><p>Select any previous date to review the attendance saved for that day.</p></div>
+    <form class="date-select" method="GET" action="/attendance"><label for="attendance-date">Choose attendance date</label><input id="attendance-date" type="date" name="date" max="<%= today %>" value="<%= date %>" onchange="this.form.submit()"></form>
+  </div>
+  <% if (markedCount > 0) { %>
+    <div class="attendance-submit"><span><strong><%= markedCount %></strong> record(s) saved · <%= date %></span><span><strong><%= Array.from(statusByStudent.values()).filter(value => value === 'Present').length %></strong> Present&nbsp;&nbsp; <strong><%= Array.from(statusByStudent.values()).filter(value => value === 'Absent').length %></strong> Absent</span></div>
+  <% } else { %><div class="empty-state"><h3>No attendance recorded for this date</h3><p>There are no saved attendance records for <%= date %>.</p></div><% } %>
+  <% if (students.length) { %>
+    <form method="POST" action="/attendance"><input type="hidden" name="date" value="<%= date %>">
+      <div class="table-wrap"><table><thead><tr><th>STUDENT</th><th>STUDENT ID</th><th>DEPARTMENT</th><th><%= date === today ? 'MARK / UPDATE STATUS' : 'SAVED STATUS' %></th></tr></thead><tbody>
+      <% students.forEach(student => { const current = statusByStudent.get(String(student._id)); %><tr>
+        <td><div class="student-cell"><div class="student-avatar"><%= student.fullName.charAt(0).toUpperCase() %></div><div><strong><%= student.fullName %></strong><small><%= student.email %></small></div></div></td>
+        <td class="id-text"><%= student.studentId %></td><td><%= student.department %></td><td>
+          <% if (current) { %><span class="<%= current === 'Present' ? 'present-choice' : 'absent-choice' %>"><%= current %></span>
+          <% } else if (date === today) { %><div class="attendance-options"><label><input type="radio" name="status[<%= student._id %>]" value="Present"><span class="present-choice">Present</span></label><label><input type="radio" name="status[<%= student._id %>]" value="Absent"><span class="absent-choice">Absent</span></label></div>
+          <% } else { %><span class="muted">Not marked</span><% } %>
+        </td></tr><% }) %></tbody></table></div>
+      <% if (date === today) { %><div class="attendance-submit"><span><%= students.length %> active student(s) · Choose a status for each student</span><button class="btn primary" type="submit">Save attendance</button></div><% } %>
+    </form>
+  <% } else { %><div class="empty-state"><h3>No active students</h3><p>Add active student records before marking attendance.</p><a class="btn primary" href="/students/new">＋ Add student</a></div><% } %>
+</section>
+<section class="table-card attendance-card"><div class="table-heading"><div><h3>Previous attendance records</h3><p>Review the last 30 dates with saved attendance.</p></div></div>
+  <% if (history.length) { %><div class="table-wrap"><table><thead><tr><th>DATE</th><th>PRESENT</th><th>ABSENT</th><th>TOTAL MARKED</th><th>ACTION</th></tr></thead><tbody>
+    <% history.forEach(day => { %><tr><td><strong><%= day._id %></strong></td><td><span class="present-choice"><%= day.present %></span></td><td><span class="absent-choice"><%= day.absent %></span></td><td><%= day.total %></td><td><a class="action-link" href="/attendance?date=<%= encodeURIComponent(day._id) %>">View records</a></td></tr><% }) %>
+  </tbody></table></div><% } else { %><div class="empty-state"><p>No previous attendance records yet. Saved dates will appear here.</p></div><% } %>
+</section>
+<footer class="page-footer">CampusFlow <span>·</span> Student records, made simpler.</footer></main></div><script src="/js/app.js"></script></body></html>
