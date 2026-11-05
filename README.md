@@ -34,6 +34,9 @@ A full-stack Student Management System built using **Node.js, Express.js, EJS an
 ### Dashboard
 ![Dashboard](./Student-Management-System/screenshots/dashboard.png)
 
+###student Directory
+![student-directory](./Student-Management-System/screenshots/student-directory.png)
+
 ### Add Student
 ![Add Student](./Student-Management-System/screenshots/add-student.png)
 
